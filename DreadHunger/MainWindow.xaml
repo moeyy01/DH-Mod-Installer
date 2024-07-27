@@ -1,0 +1,197 @@
+﻿<pu:WindowX
+    xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver" 
+    x:Class="DreadHunger.MainWindow"        
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DreadHunger" d:DataContext="{d:DesignInstance Type=local:Client}"
+    mc:Ignorable="d"
+    Loaded="WindowX_Loaded"
+    WindowStartupLocation="CenterScreen"
+    Style="{StaticResource MainWindowStyle}">
+    <pu:WindowXCaption.Header>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition  />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Image Name="TitleLogo" Style="{StaticResource TitleLogoSytle}"/>
+            <TextBlock Style="{StaticResource DefaultTitleStyle}" />
+            <StackPanel Grid.Column="3"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center">
+                <Button Click="TopMostBtn_Click"
+                        FontSize="20"
+                        Name="TopMostBtn"
+                        ToolTip="顶置"
+                        Width="28"
+                        Height="28"
+                        pu:ButtonHelper.ButtonStyle="Link"
+                        Foreground="#EAEAEA"
+                        Content="&#xe634;"
+                        FontFamily="/Resources/#iconfont"
+                        pu:ButtonHelper.HoverBrush="White"
+                        VerticalAlignment="Center"
+                        Margin="0,0,0,2" />
+            </StackPanel>
+        </Grid>
+    </pu:WindowXCaption.Header>
+    <Grid>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="10*"/>
+        <RowDefinition Height="1*"/>
+    </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Background="#FFF5F5F7" Grid.Column="0">
+                <StackPanel >
+                    <TreeView  Name="LeftTree"
+                pu:TreeViewHelper.TreeViewStyle="Modern"  
+                SelectedItemChanged="LeftTree_SelectedItemChanged"                       
+                pu:TreeViewHelper.SelectedBackground="#E8E8E8"                       
+                pu:TreeViewHelper.ItemPadding="3,0,0,0"                       
+                pu:IconHelper.FontFamily="/Resources/#iconfont"                       
+                BorderBrush="#245AFF"                       
+                Background="Transparent"                       
+                pu:TreeViewHelper.ItemHeight="32">
+                        <TreeViewItem Header="Mod Manage"      Padding="10,0,0,0"  Background="Transparent" Margin="0,5,0,5" Style="{StaticResource TreeViewItem_NonStyle}"/>
+                        <TreeViewItem Header="Play or Maps"         Padding="10,0,0,0"  Background="Transparent" pu:TreeViewHelper.ItemIcon="&#xe61d;" />
+                        <TreeViewItem Header="Patches"         Padding="10,0,0,0"  Background="Transparent" pu:TreeViewHelper.ItemIcon="&#xe61d;" />
+                        <TreeViewItem Header="Skin"         Padding="10,0,0,0"  Background="Transparent" pu:TreeViewHelper.ItemIcon="&#xe68b;" />
+                        <TreeViewItem Header="Other"     Padding="10,0,0,0"  Margin="0,5,0,5"  Style="{StaticResource TreeViewItem_NonStyle}"/>
+                        <TreeViewItem Header="Settings"         Padding="10,0,0,0"  Background="Transparent"  pu:TreeViewHelper.ItemIcon="&#xe625;" />
+                    </TreeView>
+                </StackPanel>
+            </Grid>
+            <Grid Name="RightGrid"  Visibility="Visible" Grid.Column="1" Background="AliceBlue">
+                <ProgressBar  Height="200"  Panel.ZIndex="99" FontSize="50"  Name="DownloadProcessBar" Visibility="Hidden" Width="200" pu:ProgressBarHelper.ProgressBarStyle="Ring" BorderBrush="Aqua" Background="AliceBlue" Foreground="#245AFF" pu:ProgressBarHelper.IsPercentVisible="True" />
+                  <Grid Name="PlayModGrid" Visibility="Hidden"  Margin="5">
+                        <pu:WaterfallViewer Name="wanfa"  Style="{StaticResource DefaultWaterfallViewerStyle}"/>
+                    </Grid>
+                    <Grid Name="QualityModGrid" Visibility="Hidden"  Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.95*" />
+                            <RowDefinition Height="0.05*" />
+                        </Grid.RowDefinitions>
+                        <TabControl Name="MainTab" Grid.Row="0" pu:TabControlHelper.SelectedForeground="#3F3F3F" >
+                            <TabItem Header="人物">
+                                <TabControl pu:TabControlHelper.SelectedForeground="#3F3F3F" >
+                                    <TabItem Header="船长" ><pu:WaterfallViewer Name="chuanchang"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="工程"><pu:WaterfallViewer  Name="gongcheng"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="枪手"><pu:WaterfallViewer  Name="qiangshou"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="猎人"><pu:WaterfallViewer  Name="lieren"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="医生"><pu:WaterfallViewer  Name="yisheng"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="厨师"><pu:WaterfallViewer  Name="chushi"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="导航"><pu:WaterfallViewer  Name="daohang"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="牧师"><pu:WaterfallViewer  Name="mushi"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                </TabControl>
+                            </TabItem>
+                            <TabItem Header="生物">
+                                <TabControl pu:TabControlHelper.SelectedForeground="#3F3F3F" >
+                                    <TabItem Header="老鼠"><pu:WaterfallViewer   Name="laoshu"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="野兔"><pu:WaterfallViewer   Name="yetu"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="海豹"><pu:WaterfallViewer   Name="haibao"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="狼"><pu:WaterfallViewer   Name="lang"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="北极熊"><pu:WaterfallViewer   Name="beijixiong"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="食尸鬼"><pu:WaterfallViewer   Name="shishigui"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                </TabControl>
+                            </TabItem>
+                            <TabItem Header="资源">
+                                <TabControl pu:TabControlHelper.SelectedForeground="#3F3F3F"  >
+                                    <TabItem Header="骨头"><pu:WaterfallViewer   Name="gutou"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="煤炭"><pu:WaterfallViewer   Name="meitan"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="木头"><pu:WaterfallViewer   Name="mutou"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="石头"><pu:WaterfallViewer   Name="shitou"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="磨刀石"><pu:WaterfallViewer   Name="modaoshi" Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="钥匙"><pu:WaterfallViewer   Name="yaoshi"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                </TabControl>
+                            </TabItem>
+                            <TabItem Header="武器">
+                                <TabControl  pu:TabControlHelper.SelectedForeground="#3F3F3F"  >
+                                    <TabItem Header="手枪"><pu:WaterfallViewer   Name="shouqiang"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="大枪"><pu:WaterfallViewer   Name="daqiang"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="弓"><pu:WaterfallViewer   Name="gong"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="菜刀"><pu:WaterfallViewer   Name="caidao"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="军刀"><pu:WaterfallViewer   Name="jundao"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="骨刀"><pu:WaterfallViewer   Name="gudao"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="铲子"><pu:WaterfallViewer   Name="chanzi"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="斧子"><pu:WaterfallViewer   Name="fuzi"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="冰镐"><pu:WaterfallViewer   Name="binggao"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                </TabControl>
+                            </TabItem>
+                            <TabItem Header="消耗品">
+                                <TabControl pu:TabControlHelper.SelectedForeground="#3F3F3F" >
+                                    <TabItem Header="炖肉"><pu:WaterfallViewer   Name="dunrou"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="生肉"><pu:WaterfallViewer   Name="shengrou"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="熟肉"><pu:WaterfallViewer   Name="shurou"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="脂肪"><pu:WaterfallViewer   Name="zhifang"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="茶"><pu:WaterfallViewer   Name="cha"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="鸦片酊"><pu:WaterfallViewer   Name="yapianding"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem  Header="毒药"><pu:WaterfallViewer   Name="duyao"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="解毒剂"><pu:WaterfallViewer   Name="jieduji"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                </TabControl>
+                            </TabItem>
+                            <TabItem Header="装备">
+                                <TabControl pu:TabControlHelper.SelectedForeground="#3F3F3F">
+                                    <TabItem Header="煤炭桶"><pu:WaterfallViewer   Name="meitantong"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="炸药桶"><pu:WaterfallViewer   Name="zhayaotong"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="针筒"><pu:WaterfallViewer   Name="zhentong"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="灯笼"><pu:WaterfallViewer   Name="denglong"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                    <TabItem Header="望远镜"><pu:WaterfallViewer   Name="wangyuanjing"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                </TabControl>
+                            </TabItem>
+                            <TabItem Header="其他" >
+                                <TabControl pu:TabControlHelper.SelectedForeground="#3F3F3F">
+                                    <TabItem Header="血液颜色"><pu:WaterfallViewer  Name="xueyeyanse"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>                                   
+                                    <TabItem Header="未分类"><pu:WaterfallViewer Name="weifenlei"  Style="{StaticResource DefaultWaterfallViewerStyle}"/></TabItem>
+                                </TabControl>
+                            </TabItem>
+                        </TabControl>
+                    <TextBlock xml:space="preserve"  VerticalAlignment="Center" Grid.Row="1" ><Run  FontFamily="/Resources/#iconfont">&#xe62d;  </Run><Run>Only one skin can be installed for each category, otherwise an error will occur</Run></TextBlock>
+                    </Grid>
+                    <Grid Name="PatchGrid" Visibility="Hidden"  Margin="5">
+                        <pu:WaterfallViewer Margin="0,8,0,0" Name="Patch"  Style="{StaticResource DefaultWaterfallViewerStyle}"/>
+                    </Grid>
+                <Grid Name="ManageGrid" Visibility="Hidden" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40*" />
+                        <RowDefinition Height="40*" />
+                        <RowDefinition Height="30*" />
+                        <RowDefinition Height="40*" />
+                        <RowDefinition Height="40*" />
+                        <RowDefinition Height="40*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100*"/>
+                        <ColumnDefinition Width="100*"/>
+                        <ColumnDefinition Width="800*"/>
+                        <ColumnDefinition Width="100*"/>
+                        <ColumnDefinition Width="100*"/>
+                        <ColumnDefinition Width="100*"/>
+                        <ColumnDefinition Width="100*"/>
+                        <ColumnDefinition Width="100*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Name="GetModPath" Content="Manual Bind Path" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5" Style="{StaticResource ButtonStyle}" Click="GetModPath_Click" />
+                    <Button Name="OpenModPathBtn" Content="Open Mod Path" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Style="{StaticResource ButtonStyle}" Click="OpenModPathBtn_Click"/>
+
+                    <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5">
+                    <Run FontFamily="/Resources/#iconfont">&#xe62d;  </Run>
+                    <Run>Please bind the game file DreadHunger.exe</Run>
+                    </TextBlock>
+                </Grid>
+
+            </Grid>           
+        </Grid>
+        <!--<Grid Grid.Row="1">
+            <TextBlock xml:space="preserve"   Style="{StaticResource AnnounceLblSytle}"  Grid.Row ="1" Grid.ColumnSpan="2"><Run  FontFamily="/Resources/#iconfont"> &#xe62d;  </Run><Run Text="{Binding Announce}" ></Run></TextBlock>
+        </Grid>-->
+    </Grid>
+   
+</pu:WindowX>
